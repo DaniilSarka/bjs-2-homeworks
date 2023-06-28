@@ -44,14 +44,14 @@ function differenceMaxMinWorker(...arr) {
 	}
 
 	let min = Math.min(...arr);
-	if (min === -Infinity) {
-		min = 0;
-	}
+	
 	let max = Math.max(...arr);
-	if (max === Infinity) {
-		return 0;
-	}
+	
 	let result = max - min;
+
+  if (result === -Infinity) {
+    result = 0;
+  }
 
 
 	return result;
