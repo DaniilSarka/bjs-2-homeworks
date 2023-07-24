@@ -12,27 +12,23 @@ Student.prototype.setSubject = function(subjectName) {
 
 Student.prototype.addMarks = function(...marks) {
 	if (this.marks === undefined) {
-		return "student expelled";
+		return 0;
 	}
 	this.marks.push(...marks);
-	return this.marks
 }
 //спросить почему не получилось через in
 
 Student.prototype.getAverage = function() {
 	if (this.marks === undefined || this.marks.length === 0) {
 		return 0
-	} else {
-		let sumMarks = this.marks.reduce(function(acc, item) {
-			return acc + item;
-		}, 0)
+	} 
+		let sumMarks = this.marks.reduce((acc, item)  => acc + item);
 		return sumMarks / this.marks.length;
-	}
 }
 
 
 Student.prototype.exclude = function(reason) {
-	this.reason = reason;
+	this.excluded = reason;
 	delete this.subject;
 	delete this.marks;
 	// if (this.reason === undefined) {
