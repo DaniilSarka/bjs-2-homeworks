@@ -41,7 +41,7 @@ class Book extends PrintEditionItem {
 	constructor(author, name, releaseDate, pagesCount, state, type, fix) {
 		super(name, releaseDate, pagesCount, state, type, fix);
 		this.author = author;
-			this.type = "book"
+		this.type = "book"
 	}
 }
 
@@ -81,21 +81,20 @@ class Library {
 	}
 
 	findBookBy(type, value) {
-    return this.books.find((book) => book[type] === value) || null;
-  }
-    
-  giveBookByName(bookName){
-    let nameThisBook = []
-    for (let i = 0; i < this.books.length; i++){
-      if (this.books[i].name != bookName || bookName.length === 0) {
-        nameThisBook = null
-        
-      } else {
-        nameThisBook = this.books.splice(i,1) 
-        this.books.splice(i,1) 
-      } 
-      } 
-      return nameThisBook
-    }
+		return this.books.find((book) => book[type] === value) || null;
+	}
+
+	giveBookByName(bookName) {
+		let nameThisBook = [];
+
+		if (this.books.find((book) => book.name === bookName)) {
+			nameThisBook = this.books.find((book) => book.name === bookName)
+		} else {
+			return null
+		}
+		this.books = this.books.filter((book) => book.name != bookName)
+		return nameThisBook.name
+
+	}
 }
 
