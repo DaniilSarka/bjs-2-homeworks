@@ -8,7 +8,7 @@
 
 function validateCount(a) {
 	try {
-		parseCount(a)
+		return parseCount(a)
 	} catch (Error) {
 		console.log(Error)
 		return (Error)
@@ -25,28 +25,41 @@ class Triangle {
 
 		if (this.a + this.b < this.c || this.a + this.c < this.b || this.b + this.c < this.a) {
 			throw new Error("Треугольник с такими сторонами не существует");
+
 		}
 	}
 
 	get perimeter() {
-		return this.a + this.b + this.c
+		if (this.a + this.b < this.c || this.a + this.c < this.b || this.b + this.c < this.a) {
+			return "неправильное значение"
+		} else {
+			return this.a + this.b + this.c
+		}
 	}
+
+
 
 	get area() {
-		let semiPerimeter = this.perimeter / 2;
-		let triangleSquare = Math.sqrt(semiPerimeter * (semiPerimeter - this.a) * (semiPerimeter - this.b) * (semiPerimeter - this.c));
-		return triangleSquare.toFixed(3);
+		if (this.perimeter === undefined) {
+			return "неправильное значение"
+		} else {
+			let semiPerimeter = this.perimeter / 2;
+			let triangleSquare = Math.sqrt(semiPerimeter * (semiPerimeter - this.a) * (semiPerimeter - this.b) * (semiPerimeter - this.c));
+			let TriangleSquareDot = triangleSquare.toFixed(3);
+			return Number.parseFloat(TriangleSquareDot)
+		}
 	}
-
 }
 
 function getTriangle(a, b, c) {
 	try {
+		console.log(Triangle.perimeter + Triangle.area)
 		return new Triangle(a, b, c);
-	} catch (Error) {
+
+	} catch (error) {
 		Triangle.perimeter = "Ошибка! Треугольник не существует";
 		Triangle.area = "Ошибка! Треугольник не существует";
-		return Triangle;
+		return Triangle
 
 	}
 
